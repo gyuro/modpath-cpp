@@ -81,7 +81,11 @@ python3 -m unittest discover -s tests -v
 
 This repo includes two GitHub Actions workflows:
 
-- **CI** (`.github/workflows/ci.yml`): runs tests on PR/push and builds/checks `dist/*`.
+- **CI** (`.github/workflows/ci.yml`):
+  - runs tests on PR/push (Python 3.9/3.11/3.13)
+  - runs package coverage on Python 3.11 (threshold: **70%**, adjustable via `COVERAGE_FAIL_UNDER`)
+  - uploads `coverage.xml` + text report artifacts
+  - builds/checks `dist/*`
 - **Publish** (`.github/workflows/publish-pypi.yml`): publishes to PyPI on `v*` tags (or manual dispatch).
 
 ### One-time PyPI setup (recommended: Trusted Publishing)
