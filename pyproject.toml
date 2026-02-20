@@ -1,0 +1,14 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "modpath-cpp"
+version = "0.1.0"
+description = "C++20 modules migration planner from compile_commands"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = []
+
+[project.scripts]
+modpath-cpp = "modpath_cpp.cli:main"
