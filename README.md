@@ -76,3 +76,32 @@ P3) import std readiness
 ```bash
 python3 -m unittest discover -s tests -v
 ```
+
+## CI and PyPI publishing
+
+This repo includes two GitHub Actions workflows:
+
+- **CI** (`.github/workflows/ci.yml`): runs tests on PR/push and builds/checks `dist/*`.
+- **Publish** (`.github/workflows/publish-pypi.yml`): publishes to PyPI on `v*` tags (or manual dispatch).
+
+### One-time PyPI setup (recommended: Trusted Publishing)
+
+1. Create the project on PyPI (`modpath-cpp`) if it does not exist yet.
+2. In PyPI project settings, add a **Trusted Publisher** for this GitHub repo/workflow.
+   - Owner: `gyuro`
+   - Repository: `modpath-cpp`
+   - Workflow: `publish-pypi.yml`
+   - Environment (if prompted): `pypi`
+
+### Release flow
+
+1. Bump `project.version` in `pyproject.toml`.
+2. Commit and push to `main`.
+3. Create and push a tag matching the version:
+
+```bash
+git tag v0.1.1
+git push origin v0.1.1
+```
+
+The publish workflow validates that tag version == `pyproject.toml` version before uploading.
